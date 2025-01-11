@@ -30,12 +30,33 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GIT_IMG_REG_TOKEN }}
 
-    - name: Build and push container image to registry
+    - name: Build and push - users
       uses: docker/build-push-action@v6
       with:
         push: true
         tags: ghcr.io/spehic/users:latest
         context: backend/users/
+
+    - name: Build and push - books
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        tags: ghcr.io/spehic/books:latest
+        context: backend/books/
+
+    - name: Build and push - lists
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        tags: ghcr.io/spehic/lists:latest
+        context: backend/lists/
+        
+    - name: Build and push - ratings
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        tags: ghcr.io/spehic/ratings:latest
+        context: backend/ratings/
 
 
   # deploy_to_aks:
