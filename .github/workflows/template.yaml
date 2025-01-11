@@ -32,6 +32,10 @@ jobs:
 
     - name: CD into users
       run: cd backend/users
+    - name: PWD
+      run: pwd
+    - name: LS -LA
+      run: ls -la
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v6
