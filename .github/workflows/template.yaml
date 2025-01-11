@@ -43,21 +43,21 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: ghcr.io/spehic/books:latest
+        tags: ghcr.io/spehic/books:${{ github.sha}}
         context: backend/books/
 
     - name: Build and push - lists
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: ghcr.io/spehic/lists:latest
+        tags: ghcr.io/spehic/lists:${{ github.sha}}
         context: backend/lists/
 
     - name: Build and push - ratings
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: ghcr.io/spehic/ratings:latest
+        tags: ghcr.io/spehic/ratings:${{ github.sha}}
         context: backend/ratings/
 
     # CD
@@ -78,6 +78,6 @@ jobs:
           backend/k8s-objects/ratings-deployment.yaml
         images: |
           ghcr.io/spehic/users:${{ github.sha}}
-          ghcr.io/spehic/books:latest
-          ghcr.io/spehic/lists:latest
-          ghcr.io/spehic/ratings:latest
+          ghcr.io/spehic/books:${{ github.sha}}
+          ghcr.io/spehic/lists:${{ github.sha}}
+          ghcr.io/spehic/ratings:${{ github.sha}}
