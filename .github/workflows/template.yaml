@@ -30,12 +30,15 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ github.token }}
 
+    - name: CD into users
+      run: cd backend/users
+
     - name: Build and push container image to registry
       uses: docker/build-push-action@v6
       with:
         push: true
         tags: ghcr.io/spehic/users:latest
-        file: backend/users/Dockerfile
+        file: ./Dockerfile
 
 
 
