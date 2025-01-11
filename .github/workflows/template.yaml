@@ -20,40 +20,27 @@ jobs:
       run: mvn clean package --file backend/pom.xml
 
 
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v2
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
 
-  #     - name: Set up JDK 11
-  #       uses: actions/setup-java@v2
-  #       with:
-  #         java-version: '11'
+    - name: Log in to GitHub container registry
+      uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ github.token }}
 
-  #     - name: Set up Docker Buildx
-  #       uses: docker/setup-buildx-action@v2
+      - name: Lowercase the repo name and username
+        run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
-  #     - name: Cache Maven dependencies
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ~/.m2/repository
-  #         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-maven-
+      - name: Build and push container image to registry
+        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
+        with:
+          push: true
+          tags: ghcr.io/spehic/users:latest
+          file: backend/users/Dockerfile
 
-  #     - name: Build and push Docker image
-  #       uses: docker/build-push-action@v2
-  #       with:
-  #         context: .
-  #         file: ./Dockerfile
-  #         push: true
-  #         tags: ${{ secrets.GITHUB_REPOSITORY }}:latest
-  #         build-args: |
-  #           BUILD_VERSION=${{ github.sha }}
-        
-  #     - name: Login to GitHub Container Registry
-  #       uses: docker/login-action@v2
-  #       with:
-  #         username: ${{ github.actor }}
-  #         password: ${{ secrets.GITHUB_TOKEN }}
+
 
   # deploy_to_aks:
   #   runs-on: ubuntu-latest
