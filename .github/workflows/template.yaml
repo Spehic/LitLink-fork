@@ -28,7 +28,7 @@ jobs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ github.token }}
+        password: ${{ secrets.GIT_IMG_REG_TOKEN }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v6
@@ -36,8 +36,6 @@ jobs:
         push: true
         tags: ghcr.io/spehic/users:latest
         context: backend/users/
-        secrets: |
-            GIT_AUTH_TOKEN=${{ secrets.GIT_IMG_REG_TOKEN }}
 
 
   # deploy_to_aks:
