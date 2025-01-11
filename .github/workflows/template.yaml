@@ -60,22 +60,22 @@ jobs:
 
     - name: Configure kubeconfig
       run: |
-          echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
-          export KUBECONFIG=kubeconfig
+        echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
+        export KUBECONFIG=kubeconfig
 
     - name: Deploy to AKS
-        uses: Azure/k8s-deploy@v4
-        with:
-          namespace: litlink
-          action: deploy
-          manifests: |
-            k8s/users-deployment.yaml
-            k8s/books-deployment.yaml
-            k8s/lists-deployment.yaml
-            k8s/ratings-deployment.yaml
-          images: |
-            ghcr.io/spehic/users:latest
-            ghcr.io/spehic/books:latest
-            ghcr.io/spehic/lists:latest
-            ghcr.io/spehic/ratings:latest
+      uses: Azure/k8s-deploy@v4
+      with:
+        namespace: litlink
+        action: deploy
+        manifests: |
+          k8s/users-deployment.yaml
+          k8s/books-deployment.yaml
+          k8s/lists-deployment.yaml
+          k8s/ratings-deployment.yaml
+        images: |
+          ghcr.io/spehic/users:latest
+          ghcr.io/spehic/books:latest
+          ghcr.io/spehic/lists:latest
+          ghcr.io/spehic/ratings:latest
 
