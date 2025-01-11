@@ -30,6 +30,9 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ github.token }}
 
+    - name: githubtoken
+      run: echo ${{ github.token }}
+
     - name: Build and push container image to registry
       uses: docker/build-push-action@v6
       with:
