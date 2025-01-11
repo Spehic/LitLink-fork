@@ -76,10 +76,10 @@ jobs:
         namespace: litlink
         action: deploy
         manifests: |
-          backend/k8s/users-deployment.yaml
-          backend/k8s/books-deployment.yaml
-          backend/k8s/lists-deployment.yaml
-          backend/k8s/ratings-deployment.yaml
+          backend/k8s-objects/users-deployment.yaml
+          backend/k8s-objects/books-deployment.yaml
+          backend/k8s-objects/lists-deployment.yaml
+          backend/k8s-objects/ratings-deployment.yaml
         images: |
           ghcr.io/spehic/users:latest
           ghcr.io/spehic/books:latest
