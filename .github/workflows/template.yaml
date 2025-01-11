@@ -36,7 +36,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: ghcr.io/spehic/users:latest
+        tags: ghcr.io/spehic/users:${{ github.sha}}
         context: backend/users/
 
     - name: Build and push - books
@@ -77,7 +77,7 @@ jobs:
           backend/k8s-objects/lists-deployment.yaml
           backend/k8s-objects/ratings-deployment.yaml
         images: |
-          ghcr.io/spehic/users:latest
+          ghcr.io/spehic/users:${{ github.sha}}
           ghcr.io/spehic/books:latest
           ghcr.io/spehic/lists:latest
           ghcr.io/spehic/ratings:latest
