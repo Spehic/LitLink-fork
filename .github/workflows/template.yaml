@@ -30,20 +30,13 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ github.token }}
 
-    - name: CD into users
-      run: cd backend/users
-    - name: PWD
-      run: pwd && cd backend/users && pwd
-    - name: LS -LA
-      run: ls -la
-
     - name: Build and push container image to registry
       uses: docker/build-push-action@v6
       with:
         push: true
         tags: ghcr.io/spehic/users:latest
-        file: ./Dockerfile
-
+        file: backend/users/Dockerfile
+        context: backend/users/
 
 
   # deploy_to_aks:
