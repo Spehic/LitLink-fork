@@ -33,7 +33,7 @@ jobs:
     - name: CD into users
       run: cd backend/users
     - name: PWD
-      run: pwd
+      run: pwd && cd backend/users && pwd
     - name: LS -LA
       run: ls -la
 
