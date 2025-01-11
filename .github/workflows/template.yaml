@@ -35,7 +35,6 @@ jobs:
       with:
         push: true
         tags: ghcr.io/spehic/users:latest
-        file: backend/users/Dockerfile
         context: backend/users/
 
 
