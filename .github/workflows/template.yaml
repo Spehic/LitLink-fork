@@ -60,8 +60,9 @@ jobs:
 
     - name: Configure kubeconfig
       run: |
-        echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
-        export KUBECONFIG=kubeconfig
+        echo "${{ secrets.KUBECONFIG_BASE64 }}" | base64 -d > kubeconfig
+      env:
+        KUBECONFIG: $GITHUB_WORKSPACE/kubeconfig
 
     - name: Deploy to AKS
       uses: Azure/k8s-deploy@v4
@@ -69,10 +70,10 @@ jobs:
         namespace: litlink
         action: deploy
         manifests: |
-          k8s/users-deployment.yaml
-          k8s/books-deployment.yaml
-          k8s/lists-deployment.yaml
-          k8s/ratings-deployment.yaml
+          backend/k8s/users-deployment.yaml
+          backend/k8s/books-deployment.yaml
+          backend/k8s/lists-deployment.yaml
+          backend/k8s/ratings-deployment.yaml
         images: |
           ghcr.io/spehic/users:latest
           ghcr.io/spehic/books:latest
