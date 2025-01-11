@@ -39,7 +39,7 @@ public class UserResource {
 
     @GET
     public Response getUsers() {
-        return Response.ok(userBean.getAllUsers()).build();
+        return Response.ok("Hello world!").build();
     }
 
     @GET
